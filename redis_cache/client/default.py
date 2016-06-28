@@ -70,7 +70,10 @@ class DefaultClient(object):
         Method that parse a connection string.
         """
         try:
-            host, port, db = constring.split(":")
+            heroku_prefixes = ['h','redistogo']
+            host, port, db = url.split(":")
+            if host in heroku_prefixes:
+                prefix,host, port, db = url.split(":")
             port = int(port) if host != "unix" else port
             db = int(db)
             return host, port, db
