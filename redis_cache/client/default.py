@@ -73,6 +73,7 @@ class DefaultClient(object):
             prefix,host, port, db = constring.split(":")
             port = int(port) if host != "unix" else port
             db = int(db)
+            host = "%s:%s" % (prefix,host)
             return host, port, db
         except (ValueError, TypeError):
             raise ImproperlyConfigured("Incorrect format '%s'" % (constring))
